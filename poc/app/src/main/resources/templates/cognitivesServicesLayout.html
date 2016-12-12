@@ -1,0 +1,45 @@
+<div th:fragment="content(detectionType)">
+    <div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">Cognitive Services</h3>
+    </div>
+    <div class="panel-body">
+
+        <th:block th:if="${cognitiveServiceResult.error}">
+            <div class="alert alert-danger" role="alert">
+                <p>Error tying to analize the image:</p>
+                <p th:text="${cognitiveServiceResult.error}"></p>
+            </div>
+        </th:block>
+
+        <th:block th:if="${detectionType=='OCR_DETECTION'}"  th:unless="${cognitiveServiceResult.error}">
+
+            <th:block th:each="line : ${cognitiveServiceResult.lines}" >
+                <div class="row">
+                    <div class="col-md-6 col-xs-6">
+                        <ul><li th:text="${line}"></li></ul>
+                    </div>
+                    <div class="col-xs-offset-6 text-right" style="margin-right:15px" th:with="indexId=${#ids.seq('cgs_ocr_')}">
+                        <label class="radio-inline"><input type="radio" data-executor="cognitiveServices" th:name="${indexId}"/><label>&#10004;</label></label>
+                        <label class="radio-inline"><input type="radio" data-executor="cognitiveServices" th:name="${indexId}"/><label>&#10008;</label></label>
+                    </div>
+                </div>
+            </th:block>
+        </th:block>
+
+        <th:block th:if="${detectionType=='LABEL_DETECTION'}" th:unless="${cognitiveServiceResult.error}" >
+            <th:block th:each="tag : ${cognitiveServiceResult.tags}" >
+                <div class="row">
+                    <div class="col-md-6 col-xs-6">
+                        <ul><li th:text="${tag.name}"></li></ul>
+                    </div>
+                    <div class="col-xs-offset-6 text-right" style="margin-right:15px" th:with="indexId=${#ids.seq('cgs_lbl_')}">
+                        <label class="radio-inline"><input type="radio" data-executor="cognitiveServices" th:name="${indexId}"/><label>&#10004;</label></label>
+                        <label class="radio-inline"><input type="radio" data-executor="cognitiveServices" th:name="${indexId}"/><label>&#10008;</label></label>
+                    </div>
+                </div>
+            </th:block>
+        </th:block>
+    </div>
+    </div>
+</div>

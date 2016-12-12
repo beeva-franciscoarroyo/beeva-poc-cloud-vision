@@ -1,0 +1,17 @@
+version: '2'
+services:
+  app:
+    image: gcr.io/poc-cloud-vision/app:8
+    environment:
+      - SERVER_PORT=80
+      - CLOUD_VISION_KEYS_PATH=/var/app/poc-cloud-vision-fc8488bd4d01.json
+      - SPRING_DATA_MONGODB_HOST=mongo
+      - ANALYZE_ALLOWED_IMAGE_CONF_FILE=/opt/cloud-app/image_folders.txt
+    ports:
+      - 80:80
+    depends_on:
+      - mongo
+    volumes:
+      - /opt/cloud-app:/opt/cloud-app
+  mongo:
+    image: mongo

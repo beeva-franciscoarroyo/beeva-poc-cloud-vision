@@ -1,0 +1,54 @@
+<div th:fragment="content(detectionType)">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">CloudVision</h3>
+        </div>
+        <div class="panel-body">
+
+            <th:block th:if="${cloudVisionResult.error}">
+                <div class="alert alert-danger" role="alert">
+                    <p>Error tying to analize the image:</p>
+                    <p th:text="${cloudVisionResult.error}"></p>
+                </div>
+            </th:block>
+
+            <th:block th:if="${detectionType=='OCR_DETECTION'}" th:unless="${cloudVisionResult.error}">
+                <th:block th:each="result : ${cloudVisionResult.textDetectionResultList}">
+                    <div class="row">
+                        <div class="col-md-6 col-xs-6">
+                            <ul>
+                                <li th:text="${result.description}"></li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-offset-6 text-right" style="margin-right:15px"
+                             th:with="indexId=${#ids.seq('cv_ocr_')}">
+                            <label class="radio-inline"><input type="radio" data-executor="cloudVision"
+                                                               th:name="${indexId}"/><label>&#10004;</label></label>
+                            <label class="radio-inline"><input type="radio" data-executor="cloudVision"
+                                                               th:name="${indexId}"/><label>&#10008;</label></label>
+                        </div>
+                    </div>
+                </th:block>
+            </th:block>
+
+            <th:block th:if="${detectionType=='LABEL_DETECTION'}" th:unless="${cloudVisionResult.error}">
+                <th:block th:each="result : ${cloudVisionResult.labelDetectionResultList}" >
+                    <div class="row">
+                        <div class="col-md-6 col-xs-6">
+                            <ul>
+                                <li th:text="${result.description}"></li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-offset-6 text-right" style="margin-right:15px"
+                             th:with="indexId=${#ids.seq('cv_lbl_')}">
+                            <label class="radio-inline"><input type="radio" data-executor="cloudVision"
+                                                               th:name="${indexId}"/><label>&#10004;</label></label>
+                            <label class="radio-inline"><input type="radio" data-executor="cloudVision"
+                                                               th:name="${indexId}"/><label>&#10008;</label></label>
+                        </div>
+                    </div>
+                </th:block>
+            </th:block>
+        </div>
+    </div>
+</div>

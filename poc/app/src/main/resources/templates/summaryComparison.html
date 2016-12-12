@@ -1,0 +1,33 @@
+<div th:fragment="content">
+    <form action="#" th:action="@{/comparisons/} + ${comparison.id} + @{/} + ${imageName}"
+          th:object="${summaryBean}" method="post" style="margin-top: 15px;">
+        <div class="form-group">
+            <label for="mostPreciseId">Most precise</label>
+            <select class="selectpicker" id="mostPreciseId" th:field="*{mostPrecise}">
+                <option th:value="''"></option>
+                <option th:value="${'None'}">None</option>
+                <option th:value="${'CloudVisionRequestor'}">CloudVision</option>
+                <option th:value="${'CognitiveServiceVisionRequestor'}">Cognitive Services</option>
+                <option th:value="${'Tess4JVisionRequestor'}">Tess4J</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="mostCompleteId">Most complete</label>
+            <select class="selectpicker" id="mostCompleteId" th:field="*{mostComplete}" >
+                <option th:value="''"></option>
+                <option th:value="${'None'}">None</option>
+                <option th:value="${'CloudVisionRequestor'}">CloudVision</option>
+                <option th:value="${'CognitiveServiceVisionRequestor'}">Cognitive Services</option>
+                <option th:value="${'Tess4JVisionRequestor'}">Tess4J</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <input id="executorResultId" type="hidden" th:field="*{executorsResult}" th:value="aaaaa" />
+            <button type="submit" class="btn btn-sm btn-primary" onclick="updateExecutorValue()">Next</button>
+        </div>
+    </form>
+
+    <script src="/js/jquery-3.1.1.js" />
+    <script src="/js/executors-result.js" />
+
+</div>

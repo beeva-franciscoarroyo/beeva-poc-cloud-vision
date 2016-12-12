@@ -1,0 +1,47 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/comparisonListLayout">
+<body>
+
+<div layout:fragment="content">
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/comparisons">Comparisons</a></li>
+        <li class="breadcrumb-item"><a th:href="@{/comparisons/} + ${comparison.id}"><label th:text="${comparison.id}"></label></a></li>
+        <li class="breadcrumb-item active"><label th:text="${imageName}"></label></li>
+    </ol>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <h1 th:text="${imageName}"></h1>
+        <h5 th:text="${trimmedImagePath}"></h5>
+    </div>
+
+    <div class="page-header">
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <img th:src="${imageContent}" alt="image" style="max-width: 100%"
+                     class="img-thumbnail" data-holder-rendered="true" />
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div th:include="tess4jLayout :: content(${comparison.type})" ></div>
+        </div>
+        <div class="col-md-3">
+            <!--comparison.type-->
+            <div th:include="cloudVisionLayout :: content(${comparison.type})" ></div>
+        </div>
+        <div class="col-md-3">
+            <div th:include="cognitivesServicesLayout :: content(${comparison.type})" ></div>
+        </div>
+        <div class="col-md-3">
+            <div th:include="summaryComparison :: content" ></div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/comparisonListLayout">
+<body>
+
+<div layout:fragment="content">
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/comparisons">Comparisons</a></li>
+        <li class="breadcrumb-item active"><label th:text="${comparison.id}"></label></li>
+    </ol>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <h1 th:text="${comparison.id}"></h1>
+    </div>
+
+    <div class="page-header">
+        <h1>Images</h1>
+        <p th:text="${comparison.created}"></p>
+    </div>
+    <div class="row">
+
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <!--<th>Path</th>-->
+                    <th>Compared</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="image : ${comparison.images}" style="cursor: pointer"
+                            th:onclick="'javascript:rowClicked(\'' + ${comparison.id} + '\',\'' + ${image.name} + '\');'">
+                        <td th:text="${image.name}"></td>
+                        <!--<td th:text="${image.path}"></td>-->
+                        <td>
+                            <th:block th:if="${image.compared}">
+                                <i class="glyphicon glyphicon-ok"></i>
+                            </th:block>
+                            <th:block th:unless="${image.compared}">
+                                <i class="glyphicon glyphicon-remove"></i>
+                            </th:block>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function rowClicked(id, name) {
+            location.href = "/comparisons/" + id + "/" + name;
+        }
+    </script>
+
+</div>
+</body>
+</html>

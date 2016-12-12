@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/comparisonListLayout">
+<body>
+
+<div layout:fragment="content">
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active">Comparison List</li>
+    </ol>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <h1>Comparison list</h1>
+        <p>List of comparisons</p>
+    </div>
+
+    <div class="page-header">
+        <h1>Comparisons</h1>
+    </div>
+    <div class="row">
+
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>name</th>
+                    <th>type</th>
+                    <th>created</th>
+                    <th>Link</th>
+                </tr>
+                </thead>
+                <tbody>
+                <th:block th:each="comparison : ${comparisonList}">
+                    <tr>
+                        <td th:text="${comparison.name}"></td>
+                        <td th:text="${comparison.type}"></td>
+                        <td th:text="${comparison.created}"></td>
+                        <td><a th:href="${'/comparisons/' + comparison.id}">-></a></td>
+                    </tr>
+                </th:block>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

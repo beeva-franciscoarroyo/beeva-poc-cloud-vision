@@ -1,0 +1,37 @@
+<div th:fragment="content(detectionType)">
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Tess4j</h3>
+    </div>
+    <div class="panel-body">
+
+        <th:block th:if="${detectionType=='OCR_DETECTION'}">
+
+            <th:block th:if="${tess4jResult.error}">
+                <div class="alert alert-danger" role="alert">
+                    <p>Error tying to analize the image:</p>
+                    <p th:text="${tess4jResult.error}"></p>
+                </div>
+            </th:block>
+
+            <th:block th:unless="${tess4jResult.error}">
+                <th:block th:unless="${tess4jResult.error}" th:each="result : ${tess4jResult.results}">
+                    <div class="row">
+                        <div class="col-md-6 col-xs-6">
+                            <ul><li th:text="${result}"></li></ul>
+                        </div>
+                        <div class="col-xs-offset-6 text-right" style="margin-right:15px" th:with="indexId=${#ids.seq('t4j_ocr_')}">
+                            <label class="radio-inline"><input type="radio" data-executor="tess4j" th:name="${indexId}"/><label>&#10004;</label></label>
+                            <label class="radio-inline"><input type="radio" data-executor="tess4j" th:name="${indexId}"/><label>&#10008;</label></label>
+                        </div>
+                    </div>
+                </th:block>
+            </th:block>
+        </th:block>
+
+        <th:block th:if="${detectionType=='LABEL_DETECTION'}">
+            Label detection is not supported
+        </th:block>
+    </div>
+</div>
+</div>

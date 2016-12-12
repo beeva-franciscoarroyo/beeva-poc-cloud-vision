@@ -1,0 +1,31 @@
+<div th:fragment="content(detectionTypeTitle, results)">
+    <div class="row">
+        <div class="col-md-12 col-xs-12">
+            <h2 th:text="${detectionTypeTitle}">OCR Detection</h2>
+
+            <div>
+                Total images: <label th:text="${results.totalImageCount}"></label>
+            </div>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th:block th:each="headValue : ${results.headers}">
+                        <th th:text="${headValue}"></th>
+                    </th:block>
+                </tr>
+                </thead>
+                <tbody>
+                <th:block th:each="measure : ${results.measures}">
+                    <tr>
+                        <th scope="row" th:text="${measure.name}"></th>
+                        <th:block th:each="value: ${measure.values}">
+                            <td th:text="${value}"></td>
+                        </th:block>
+                    </tr>
+                </th:block>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/comparisonListLayout">
+<body>
+
+<div layout:fragment="content">
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active">Results</li>
+    </ol>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <h1>Results</h1>
+    </div>
+
+    <div th:include="resultPerRequestType :: content('OCR Detection', ${ocrResults})"/>
+    <div th:include="resultPerRequestType :: content('Label Detection', ${labelResults})"/>
+
+
+</div>
+
+</body>
+</html>

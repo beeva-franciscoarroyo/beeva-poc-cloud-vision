@@ -1,0 +1,9 @@
+docker pull mongo
+docker run --name mongo -p27017:27017 -d -v/Users/fjarroyo/Documents/workspaces/iniciativas/ryd/vision/mongo:/data/db mongo
+
+
+¿Qué se quiere medir? [OCR|LABEL]
+- Tiempo
+- Exactitud
+
+

@@ -1,0 +1,56 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/comparisonListLayout">
+<body>
+
+<div layout:fragment="content">
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active">Analyze</li>
+    </ol>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <h1>Analyze</h1>
+    </div>
+
+    <th:block th:if="${analyzeStarted}">
+        <div class="alert alert-success" role="alert">
+            <strong>Ok.</strong> Running analysis in background
+        </div>
+    </th:block>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <form action="#" th:action="@{/batch_analyze}" th:object="${analyzeBean}" method="post">
+
+                <div class="form-group">
+                    <label for="typeSelection">Name</label>
+                    <input type="text" placeholder="name" th:field="*{name}" th:value="*{name}"
+                           required="true" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label for="typeSelection">Type detection</label>
+                    <select class="selectpicker form-control" id="typeSelection" th:field="*{typeSelection}">
+                        <option th:value="${'Label Detection'}">Label Detection</option>
+                        <option th:value="${'Ocr Detection'}">Ocr Detection</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="basePathSelection">Base path</label>
+                    <select class="selectpicker form-control" id="basePathSelection" th:field="*{basePathSelection}">
+                        <th:block th:each="basePath : ${allowedBasePathList}">
+                            <option th:text="${basePath}" th:value="${basePath}" >option</option>
+                        </th:block>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-sm btn-primary">Analyze</button>
+            </form>
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>
